@@ -1,0 +1,6 @@
+google-cloud-bigquery
+plotext
+python-dotenv
+requests
+pillow
+ansi2image

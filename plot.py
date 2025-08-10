@@ -28,6 +28,7 @@ def plot_stacked_bars(labels, series, username):
     # plot stacked bars
     plt.clear_figure()
     plt.theme('dark')  # use dark theme for better colors
+    plt.limit_size(False, False)  # Don't limit to terminal size (important for pipes)
     plt.plotsize(120, 34)
     plt.title(f"PyPI downloads (last {len(labels)} full months) — {username}")
     plt.xlabel("Month")
