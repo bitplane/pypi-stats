@@ -10,18 +10,20 @@ def plot_stacked_bars(labels, series, username):
         series: Dict mapping package names to download counts per month
         username: PyPI username for chart title
     """
-    # Sort packages by total downloads (most popular first)
+    # Filter out packages with zero downloads and sort by total downloads
     totals = {p: sum(v) for p, v in series.items()}
-    sorted_packages = sorted(series.keys(), key=lambda p: totals[p], reverse=True)
+    # Remove packages with 0 total downloads
+    filtered_packages = {p: total for p, total in totals.items() if total > 0}
+    sorted_packages = sorted(filtered_packages.keys(), key=lambda p: totals[p], reverse=True)
     series = {p: series[p] for p in sorted_packages}
-
-    # Define colors and patterns for better visual distinction
-    colors = ['red', 'green', 'blue', 'yellow', 'magenta', 'cyan', 'white', 
-              'bright red', 'bright green', 'bright blue', 'bright yellow', 
-              'bright magenta', 'bright cyan', 'orange', 'gray', 'purple']
     
-    # Good working patterns - avoid solid blocks and ugly symbols
-    patterns = ['█', '▄', '▌', '⠿', '■']  # solid, bottom-half, left-half, braille, square
+    print(f"Showing {len(sorted_packages)} packages with downloads (filtered out {len(totals) - len(sorted_packages)} zero-download packages)", file=sys.stderr)
+
+    # Use basic ANSI colors 1-8 (skip 0=black) plus hand-picked good colors
+    # 1=red, 2=green, 3=yellow, 4=blue, 5=magenta, 6=cyan, 7=white, 8=gray
+    colors = list(range(1, 9)) + [82, 52, 213]  # Basic colors + selected extras
+    
+    patterns = ['▌', '⯀', '█']
 
     # plot stacked bars
     plt.clear_figure()
@@ -41,11 +43,12 @@ def plot_stacked_bars(labels, series, username):
         color_index = i % len(colors)
         pattern_index = i // len(colors)  # Only advance pattern after all colors used
         
-        color = colors[color_index]
+        color = colors[color_index]  # Get the integer color code
         pattern = patterns[pattern_index % len(patterns)]
         
         # Add individual series with specific color and marker
+        # Pass color as a list since stacked_bar expects a list
         plt.stacked_bar(labels, [data], labels=[label], 
-                       color=color, marker=pattern)
+                       color=[color], marker=pattern)
     
     plt.show()
