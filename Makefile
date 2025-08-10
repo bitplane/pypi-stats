@@ -6,10 +6,10 @@ USERNAME ?= davidsong
 run: stats.png ## Run the stats script for $(USERNAME) and save as PNG
 
 stats.png: stats.ansi .venv/bin/activate ## Convert ANSI to PNG
-	. .venv/bin/activate && ansi2image stats.ansi -o stats.png
+	.venv/bin/ansi2image stats.ansi -o stats.png
 
 stats.ansi: .venv/bin/activate ## Generate stats chart
-	. .venv/bin/activate && python stats.py $(USERNAME) | tee stats.ansi
+	.venv/bin/python stats.py $(USERNAME) | tee stats.ansi
 
 .venv/bin/activate: requirements.txt ## Create virtual environment and install dependencies
 	python3 -m venv .venv
