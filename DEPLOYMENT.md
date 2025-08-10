@@ -36,14 +36,19 @@ gcloud iam service-accounts keys create key.json \
 Your Google Cloud Project ID (e.g., `pypi-stats-30335`)
 
 ### 3. `DEPLOY_PAT`
-Personal Access Token for pushing to your website repository.
+Fine-grained Personal Access Token for pushing to your website repository.
 
-1. Go to GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)
-2. Click "Generate new token (classic)"
+1. Go to GitHub Settings → Developer settings → Personal access tokens → Fine-grained tokens
+2. Click "Generate new token"
 3. Give it a name like "pypi-stats-deploy"
-4. Select scopes: `repo` (full control of private repositories)
-5. Generate the token and copy it
-6. Add it as `DEPLOY_PAT` secret in your pypi-stats repository settings
+4. Set expiration to never 
+5. Under "Repository access", select "Selected repositories" and choose only `bitplane/bitplane.net`
+6. Under "Repository permissions", grant ONLY:
+   - **Contents**: Read and Write (to push the PNG file)
+   - **Metadata**: Read (automatically required)
+7. Generate the token and copy it
+8. Add it as `DEPLOY_PAT` secret in your pypi-stats repository settings
+
 
 ## Manual Testing
 
