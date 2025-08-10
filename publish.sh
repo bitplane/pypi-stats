@@ -43,6 +43,8 @@ cp "$SRC_FILE" "$FULL_DEST_PATH"
 # Commit and push
 echo "Committing and pushing changes..."
 cd "$TMP_DIR"
+git config user.email "action@github.com"
+git config user.name "GitHub Action"
 git add "$DEST_PATH"
 git commit -m "$COMMIT_MSG"
 git push
