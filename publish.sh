@@ -1,0 +1,48 @@
+#!/bin/sh
+
+set -e
+
+# Variables
+REPO_URL="ssh://git@github.com/bitplane/bitplane.net.git"
+SRC_FILE="stats.png"
+DEST_PATH="dev/python/stats.png"
+COMMIT_MSG="Update PyPI stats chart"
+
+# Generate the stats chart
+echo "Generating stats chart..."
+make
+
+# Check out the main website repo
+TMP_DIR=$(mktemp -d)
+
+# Cleanup on exit
+cleanup() {
+    echo "Cleaning up..."
+    rm -rf "$TMP_DIR"
+}
+trap cleanup EXIT
+
+# Clone the repository
+echo "Cloning $REPO_URL into $TMP_DIR..."
+git clone --depth=1 "$REPO_URL" "$TMP_DIR"
+
+# Set up the destination path
+FULL_DEST_PATH="$TMP_DIR/$DEST_PATH"
+DEST_DIR=$(dirname "$FULL_DEST_PATH")
+
+# Create directory if needed
+echo "Creating directory $DEST_DIR..."
+mkdir -p "$DEST_DIR"
+
+# Copy the stats.png file
+echo "Copying $SRC_FILE to $FULL_DEST_PATH..."
+cp "$SRC_FILE" "$FULL_DEST_PATH"
+
+# Commit and push
+echo "Committing and pushing changes..."
+cd "$TMP_DIR"
+git add "$DEST_PATH"
+git commit -m "$COMMIT_MSG"
+git push
+
+echo "Stats chart published!"

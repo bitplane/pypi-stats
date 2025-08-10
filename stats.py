@@ -72,7 +72,7 @@ def fetch_single_month_stats(project_id: str, projects, year_month: str, dry_run
     job = client.query(sql, job_config=job_config, location="US")
     
     if dry_run:
-        print(f"Query for {year_month} will process {job.total_bytes_processed / (1024**3):.2f} GB")
+        print(f"Query for {year_month} will process {job.total_bytes_processed / (1024**3):.2f} GB", file=sys.stderr)
         return []
     
     # Return as dict for easier caching
@@ -107,12 +107,12 @@ def monthly_stats_generator(project_id: str, username: str, projects, months_lis
         )
         
         if need_query:
-            print(f"Querying BigQuery for {month}...")
+            print(f"Querying BigQuery for {month}...", file=sys.stderr)
             if dry_run:
                 try:
                     fetch_single_month_stats(project_id, projects, month, dry_run=True)
                 except Exception as e:
-                    print(f"ERROR: Failed to query {month}: {e}")
+                    print(f"ERROR: Failed to query {month}: {e}", file=sys.stderr)
                 yield month, {}
             else:
                 try:
@@ -120,11 +120,11 @@ def monthly_stats_generator(project_id: str, username: str, projects, months_lis
                     save_month_data_to_cache(username, month, stats)
                     yield month, stats
                 except Exception as e:
-                    print(f"ERROR: Failed to query {month}: {e}")
-                    print(f"Skipping {month} - run again later when quota resets")
+                    print(f"ERROR: Failed to query {month}: {e}", file=sys.stderr)
+                    print(f"Skipping {month} - run again later when quota resets", file=sys.stderr)
                     yield month, {}
         else:
-            print(f"Using cached data for {month}")
+            print(f"Using cached data for {month}", file=sys.stderr)
             cached_data = get_cached_month_data(username, month)
             yield month, cached_data
 

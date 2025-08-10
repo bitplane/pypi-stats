@@ -4,8 +4,8 @@ USERNAME ?= davidsong
 
 # Default target
 run: ## Run the stats script for $(USERNAME) and save as PNG
-	./stats.py $(USERNAME) | tee pic.ansi
-	ansi2image pic.ansi -o pic.png
+	./stats.py $(USERNAME) | tee stats.ansi
+	ansi2image stats.ansi -o stats.png
 
 install: ## Install dependencies
 	pip install -r requirements.txt
