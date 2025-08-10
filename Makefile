@@ -3,10 +3,11 @@
 USERNAME ?= davidsong
 
 # Default target
-run: stats.png ## Run the stats script for $(USERNAME) and save as PNG
+run: stats.svg ## Run the stats script for $(USERNAME) and save as SVG
 
-stats.png: stats.ansi .venv/bin/activate ## Convert ANSI to PNG
-	.venv/bin/ansi2image stats.ansi -o stats.png
+
+stats.svg: stats.ansi .venv/bin/activate ## Convert ANSI to SVG
+	.venv/bin/python ansi2svg.py stats.ansi stats.svg
 
 stats.ansi: .venv/bin/activate ## Generate stats chart
 	.venv/bin/python stats.py $(USERNAME) | tee stats.ansi
@@ -18,7 +19,7 @@ stats.ansi: .venv/bin/activate ## Generate stats chart
 
 venv: .venv/bin/activate ## Create virtual environment
 
-deploy: stats.png ## Deploy stats chart to website
+deploy: stats.svg ## Deploy stats chart to website
 	./commit-cache.sh
 	./publish.sh
 
@@ -33,7 +34,7 @@ dev: ## Install in development mode
 
 clean: ## Clean cache and generated files
 	rm -rf cache/__pycache__ .venv
-	rm -f *.png *.ansi
+	rm -f *.svg *.ansi
 	find . -type d -name "__pycache__" -exec rm -rf {} +
 
 help: ## Show this help message

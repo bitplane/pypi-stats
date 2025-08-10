@@ -1,6 +1,4 @@
-google-cloud-bigquery
-plotext
-python-dotenv
-requests
-pillow
-ansi2image
+google-cloud-bigquery<4
+plotext~=5.3
+python-dotenv~=1.1
+rich~=14.1

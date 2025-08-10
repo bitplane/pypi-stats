@@ -27,7 +27,7 @@ def plot_stacked_bars(labels, series, username):
 
     # plot stacked bars
     plt.clear_figure()
-    plt.theme('dark')  # use dark theme for better colors
+    plt.theme('clear')  # use clear theme for simpler borders
     plt.limit_size(False, False)  # Don't limit to terminal size (important for pipes)
     plt.plotsize(120, 34)
     plt.title("pypi stats")

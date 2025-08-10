@@ -55,8 +55,8 @@ def fetch_single_month_stats(project_id: str, projects, year_month: str, dry_run
       project,
       COUNT(1) AS downloads
     FROM `bigquery-public-data.pypi.file_downloads`
-    WHERE project IN UNNEST(@projects)
-      AND DATE(timestamp) BETWEEN @start AND @end
+    WHERE _PARTITIONDATE BETWEEN @start AND @end
+      AND project IN UNNEST(@projects)
     GROUP BY project
     """
     job_config = bigquery.QueryJobConfig(

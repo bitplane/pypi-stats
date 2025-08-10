@@ -4,13 +4,13 @@ set -e
 
 # Variables
 REPO_URL="https://github.com/bitplane/bitplane.net.git"
-SRC_FILE="stats.png"
-DEST_PATH="dev/python/stats.png"
+SRC_FILE="stats.svg"
+DEST_PATH="dev/python/stats.svg"
 COMMIT_MSG="Update PyPI stats chart"
 
-# Check that stats.png exists
+# Check that stats.svg exists
 if [ ! -f "$SRC_FILE" ]; then
-    echo "Error: $SRC_FILE not found. Run 'make stats.png' first."
+    echo "Error: $SRC_FILE not found. Run 'make stats.svg' first."
     exit 1
 fi
 
@@ -36,7 +36,7 @@ DEST_DIR=$(dirname "$FULL_DEST_PATH")
 echo "Creating directory $DEST_DIR..."
 mkdir -p "$DEST_DIR"
 
-# Copy the stats.png file
+# Copy the stats.svg file
 echo "Copying $SRC_FILE to $FULL_DEST_PATH..."
 cp "$SRC_FILE" "$FULL_DEST_PATH"
 

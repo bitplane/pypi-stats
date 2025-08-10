@@ -72,12 +72,12 @@ It will:
 1. Generate new stats for the current month
 2. Update the cache with any new data
 3. Commit and push cache changes
-4. Deploy the updated PNG to your website
+4. Deploy the updated SVG to your website
 
 ## Makefile Targets
 
 - `make venv` - Create virtual environment
 - `make stats.ansi` - Generate ANSI chart output
-- `make stats.png` - Convert ANSI to PNG
-- `make deploy` - Deploy PNG to website
+- `make stats.svg` - Convert ANSI to SVG
+- `make deploy` - Deploy SVG to website
 - `make clean` - Clean up generated files and venv
