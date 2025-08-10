@@ -35,16 +35,8 @@ gcloud iam service-accounts keys create key.json \
 ### 2. `GCP_PROJECT`
 Your Google Cloud Project ID (e.g., `pypi-stats-30335`)
 
-### 3. `DEPLOY_SSH_KEY`
-Private SSH key for pushing to your website repository.
-
-```bash
-# Generate a new SSH key (don't use your personal one)
-ssh-keygen -t ed25519 -f deploy_key -N ""
-
-# Add the public key (deploy_key.pub) to your website repository's deploy keys
-# Copy the private key (deploy_key) content into the DEPLOY_SSH_KEY secret
-```
+### 3. `GITHUB_TOKEN`
+The built-in `GITHUB_TOKEN` is automatically available in GitHub Actions. No setup needed!
 
 ## Manual Testing
 

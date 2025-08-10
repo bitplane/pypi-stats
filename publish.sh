@@ -3,7 +3,7 @@
 set -e
 
 # Variables
-REPO_URL="ssh://git@github.com/bitplane/bitplane.net.git"
+REPO_URL="https://github.com/bitplane/bitplane.net.git"
 SRC_FILE="stats.png"
 DEST_PATH="dev/python/stats.png"
 COMMIT_MSG="Update PyPI stats chart"
@@ -26,7 +26,7 @@ trap cleanup EXIT
 
 # Clone the repository
 echo "Cloning $REPO_URL into $TMP_DIR..."
-git clone --depth=1 "$REPO_URL" "$TMP_DIR"
+git clone --depth=1 "https://x-access-token:${GITHUB_TOKEN}@github.com/bitplane/bitplane.net.git" "$TMP_DIR"
 
 # Set up the destination path
 FULL_DEST_PATH="$TMP_DIR/$DEST_PATH"
