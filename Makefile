@@ -5,7 +5,7 @@ USERNAME ?= davidsong
 # Default target
 run: stats.png ## Run the stats script for $(USERNAME) and save as PNG
 
-stats.png: stats.ansi ## Convert ANSI to PNG
+stats.png: stats.ansi .venv/bin/activate ## Convert ANSI to PNG
 	. .venv/bin/activate && ansi2image stats.ansi -o stats.png
 
 stats.ansi: .venv/bin/activate ## Generate stats chart
