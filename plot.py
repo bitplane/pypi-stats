@@ -23,7 +23,7 @@ def plot_stacked_bars(labels, series, username):
     # 1=red, 2=green, 3=yellow, 4=blue, 5=magenta, 6=cyan, 7=white, 8=gray
     colors = list(range(1, 9)) + [82, 52, 213]  # Basic colors + selected extras
     
-    patterns = ['▌', '⯀', '█']
+    patterns = ['#', '%', 'X']
 
     # plot stacked bars
     plt.clear_figure()
