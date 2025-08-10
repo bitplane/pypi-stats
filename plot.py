@@ -23,14 +23,16 @@ def plot_stacked_bars(labels, series, username):
     # 1=red, 2=green, 3=yellow, 4=blue, 5=magenta, 6=cyan, 7=white, 8=gray
     colors = list(range(1, 9)) + [82, 52, 213]  # Basic colors + selected extras
     
-    patterns = ['#', '%', 'X']
+    # Use Unicode block shading characters from lightest to darkest
+    # Light shade (25%), medium shade (50%), full block (100%)
+    patterns = ['▚', '▒', '█']
 
     # plot stacked bars
     plt.clear_figure()
     plt.theme('clear')  # use clear theme for simpler borders
     plt.limit_size(False, False)  # Don't limit to terminal size (important for pipes)
     plt.plotsize(120, 34)
-    plt.title("pypi stats")
+    # plt.title("pypi stats")  # Remove title since SVG has window title
     plt.xlabel("Month")
     plt.ylabel("Downloads")
     plt.xticks(range(len(labels)), labels)

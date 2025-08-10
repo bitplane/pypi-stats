@@ -9,7 +9,7 @@ run: stats.svg ## Run the stats script for $(USERNAME) and save as SVG
 stats.svg: stats.ansi .venv/bin/activate ## Convert ANSI to SVG
 	.venv/bin/python ansi2svg.py stats.ansi stats.svg
 
-stats.ansi: .venv/bin/activate ## Generate stats chart
+stats.ansi: .venv/bin/activate plot.py ## Generate stats chart
 	.venv/bin/python stats.py $(USERNAME) | tee stats.ansi
 
 .venv/bin/activate: requirements.txt ## Create virtual environment and install dependencies
