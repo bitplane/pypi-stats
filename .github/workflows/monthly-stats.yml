@@ -45,19 +45,12 @@ jobs:
         
     - name: Generate stats and PNG
       run: |
-        make USERNAME=${{ github.event.inputs.username || 'davidsong' }} stats.png
+        USERNAME=${{ github.event.inputs.username || 'davidsong' }} make stats.png
         
-    - name: Commit and push updated cache
+    - name: Configure git for cache commits
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add cache/
-        if git diff --staged --quiet; then
-          echo "No cache changes to commit"
-        else
-          git commit -m "Update PyPI stats cache - $(date '+%Y-%m-%d')"
-          git push
-        fi
         
     - name: Deploy to website
       env:

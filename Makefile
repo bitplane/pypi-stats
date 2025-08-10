@@ -19,7 +19,11 @@ stats.ansi: .venv/bin/activate ## Generate stats chart
 venv: .venv/bin/activate ## Create virtual environment
 
 deploy: stats.png ## Deploy stats chart to website
+	./commit-cache.sh
 	./publish.sh
+
+commit-cache: ## Commit and push any cache updates
+	./commit-cache.sh
 
 install: ## Install dependencies
 	pip install -r requirements.txt
