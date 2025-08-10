@@ -35,8 +35,15 @@ gcloud iam service-accounts keys create key.json \
 ### 2. `GCP_PROJECT`
 Your Google Cloud Project ID (e.g., `pypi-stats-30335`)
 
-### 3. `GITHUB_TOKEN`
-The built-in `GITHUB_TOKEN` is automatically available in GitHub Actions. No setup needed!
+### 3. `DEPLOY_PAT`
+Personal Access Token for pushing to your website repository.
+
+1. Go to GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)
+2. Click "Generate new token (classic)"
+3. Give it a name like "pypi-stats-deploy"
+4. Select scopes: `repo` (full control of private repositories)
+5. Generate the token and copy it
+6. Add it as `DEPLOY_PAT` secret in your pypi-stats repository settings
 
 ## Manual Testing
 
