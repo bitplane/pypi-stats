@@ -1,7 +1,5 @@
 # Deployment Setup
 
-This document explains how to set up the automated PyPI stats system in GitHub Actions.
-
 ## Required GitHub Secrets
 
 Set these in your GitHub repository settings under Settings → Secrets and variables → Actions:

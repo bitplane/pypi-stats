@@ -8,9 +8,11 @@ SRC_FILE="stats.png"
 DEST_PATH="dev/python/stats.png"
 COMMIT_MSG="Update PyPI stats chart"
 
-# Generate the stats chart
-echo "Generating stats chart..."
-make
+# Check that stats.png exists
+if [ ! -f "$SRC_FILE" ]; then
+    echo "Error: $SRC_FILE not found. Run 'make stats.png' first."
+    exit 1
+fi
 
 # Check out the main website repo
 TMP_DIR=$(mktemp -d)
