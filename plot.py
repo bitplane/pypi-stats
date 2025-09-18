@@ -31,7 +31,8 @@ def plot_stacked_bars(labels, series, username):
     plt.clear_figure()
     plt.theme('clear')  # use clear theme for simpler borders
     plt.limit_size(False, False)  # Don't limit to terminal size (important for pipes)
-    plt.plotsize(120, 34)
+    # Increase height to accommodate more legend items
+    plt.plotsize(120, 40)
     # plt.title("pypi stats")  # Remove title since SVG has window title
     plt.xlabel("Month")
     plt.ylabel("Downloads")

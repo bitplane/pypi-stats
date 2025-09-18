@@ -16,7 +16,7 @@ def ansi_to_svg(ansi_file, svg_file):
         ansi_content = f.read()
     
     # Create a console to record the output
-    console = Console(record=True, width=120, height=40, legacy_windows=False)
+    console = Console(record=True, width=120, height=46, legacy_windows=False)
     
     # Print the ANSI content (Rich will interpret the ANSI codes)
     # Use no_wrap and overflow="ignore" to preserve exact spacing
