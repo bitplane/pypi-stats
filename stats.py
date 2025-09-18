@@ -97,12 +97,13 @@ def save_month_data_to_cache(username: str, year_month: str, data):
 
 def monthly_stats_generator(project_id: str, username: str, projects, months_list, dry_run=False):
     """Generator that yields (month, stats_dict) for each month"""
-    current_month = dt.date.today().strftime("%Y-%m")
+    # Always refresh the most recent month in the list (last complete month)
+    most_recent_month = months_list[-1] if months_list else None
     
     for month in months_list:
         # Check if we need to query BigQuery
         need_query = (
-            month == current_month or  # Always refresh current month
+            month == most_recent_month or  # Always refresh most recent complete month
             get_cached_month_data(username, month) is None  # No cached data
         )
         
