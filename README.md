@@ -7,6 +7,4 @@ each month:
 
 ## Want one?
 
-Steal the coe. See [DEPLOYMENT.md](DEPLOYMENT.md)
-
-
+Steal this code. See [DEPLOYMENT.md](DEPLOYMENT.md)
